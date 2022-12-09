@@ -1,21 +1,31 @@
 import dayjs from "dayjs";
 import { CreateTaskCss, ModalCss } from "../../style";
-import React, { FormEventHandler } from "react";
+import React, { FormEventHandler, MouseEventHandler } from "react";
 
 interface ICreateTask {
   activeDay: dayjs.Dayjs;
   onCreateNewTask: FormEventHandler<HTMLFormElement>;
+  onHandleCreateTaskModal: MouseEventHandler<HTMLButtonElement>;
 }
 
-const CreateTask: React.FC<ICreateTask> = ({ activeDay, onCreateNewTask }) => {
+const CreateTask: React.FC<ICreateTask> = ({ activeDay, onCreateNewTask, onHandleCreateTaskModal }) => {
   return (
     <div css={ModalCss.overlay}>
       <div css={ModalCss.modal}>
-        Create new task for date: {activeDay.format()}
+        <div css={CreateTaskCss.title}>Create new task</div>
         <form onSubmit={onCreateNewTask} css={CreateTaskCss.form}>
-          <input css={CreateTaskCss.input}/>
-          <button css={CreateTaskCss.button(true)}>Cancel</button>
-          <button css={CreateTaskCss.button(false)}type="submit">Create</button>
+          <div css={CreateTaskCss.label}>Choose date:</div>
+          <input type="date" css={CreateTaskCss.input} defaultValue={activeDay.format("YYYY-MM-DD")} name="date" />
+          <div css={CreateTaskCss.label}>Label</div>
+          <input css={CreateTaskCss.input} name="label" />
+          <div css={CreateTaskCss.label}>Description</div>
+          <input css={CreateTaskCss.input} name="desc"/>
+          <div css={CreateTaskCss.label}>Color</div>
+          <input css={CreateTaskCss.input} type="color" name="color" />
+          <div css={CreateTaskCss.action}>
+            <button css={CreateTaskCss.button(true)} onClick={onHandleCreateTaskModal}>Cancel</button>
+            <button css={CreateTaskCss.button(false)}type="submit">Create</button>
+          </div>
         </form>
       </div>
     </div>

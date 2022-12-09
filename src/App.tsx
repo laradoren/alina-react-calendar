@@ -13,17 +13,23 @@ function App() {
   
   const onCreateNewTask = (e: any) => {
     e.preventDefault();
+    let formData = new FormData(e.target);
+    console.log(formData.get("date"));
+    console.log(formData.get("color"));
+    console.log(formData.get("label"));
+    console.log(formData.get("desc"));
+
   }
 
-  const onCreateTaskModalOpen = () => {
-    setCreateTaskModal(true);
+  const onHandleCreateTaskModal = () => {
+    setCreateTaskModal(prev => !prev);
   }
   
 
   return (
     <div css={AppCss.app}>
-      <Header onCreateTaskModalOpen={onCreateTaskModalOpen} />
-      {createTaskModal && <CreateTask activeDay={activeDay} onCreateNewTask={onCreateNewTask} />}
+      <Header onHandleCreateTaskModal={onHandleCreateTaskModal} />
+      {createTaskModal && <CreateTask activeDay={activeDay} onCreateNewTask={onCreateNewTask} onHandleCreateTaskModal={onHandleCreateTaskModal} />}
       <Calendar month={currentMonth} activeDay={activeDay} setActiveDay={setActiveDay} />
     </div>
   );

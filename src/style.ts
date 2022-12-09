@@ -36,39 +36,51 @@ export const DayCss = {
 }
 
 export const CreateTaskCss = {
+    title: css `
+        font-size: 20px;
+        font-weight: 600;
+    `,
+    label: css `
+        font-size: 18px;
+        font-weight: 400;
+        text-align: left;
+        margin-top: 20px;
+    `,
     form: css`
         display: flex;
         flex-direction: column;
     `,
     input: css`
-        display: inline-block;
         width: 100%;
-        font: inherit;
-        font-size: 20px;
+        font-size: 18px;
         border: none;
+        border-bottom: 1px solid grey;
         outline: none;
         padding-left: 4px;
         padding-right: 4px;
+        margin-top: 10px;
+        font-family: inherit;
+    `,
+    action: css`
+        display: flex;
     `,
     button: (cancel: boolean) => css`
+        margin: 35px 5px 0px 5px;
         padding: 8px 16px;
         border-radius: 2px;
-        background-color: ${cancel ? "lightgrey" : "#3f51b5"};
-        transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        background-color: ${cancel ? "#fff" : "#3f51b5"};
         text-align: center;
         display: inline-block;
-        color: #fff;
+        color: ${cancel ? "#000" : "#fff"};
         border: 0;
         text-decoration: none;
         cursor: pointer;
         font-family: inherit;
-        font-size: 18px;
+        font-size: 15px;
         line-height: 24px;
         font-style: normal;
         font-weight: 500;
         min-width: 180px;
-        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-        0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
     `
 }
 

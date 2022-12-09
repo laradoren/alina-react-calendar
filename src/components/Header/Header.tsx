@@ -3,17 +3,17 @@ import { MouseEventHandler } from "react";
 import { HeaderCss } from "../../style";
 
 interface IHeader {
-  onCreateTaskModalOpen: MouseEventHandler<HTMLButtonElement>;
+  onHandleCreateTaskModal: MouseEventHandler<HTMLButtonElement>;
 }
 
-const Header: React.FC<IHeader> = ({ onCreateTaskModalOpen }) => {
+const Header: React.FC<IHeader> = ({ onHandleCreateTaskModal }) => {
   let currentDate = dayjs();
   return (
     <header css={HeaderCss.header}>
       <div>
         {currentDate.format()}
         <button>Chose date</button>
-        <button onClick={onCreateTaskModalOpen}>create task</button>
+        <button onClick={onHandleCreateTaskModal}>create task</button>
       </div>
       <div css={HeaderCss.actionList}>
         <button>Save as Json</button>
