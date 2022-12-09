@@ -1,14 +1,14 @@
 import dayjs from "dayjs";
 import { DayCss } from "../../style";
 
-interface IDay {
+interface IDatePicker {
   day: dayjs.Dayjs,
   isToday: boolean,
   active: boolean,
   setActiveDay: Function
 }
 
-const Day:React.FC<IDay> = ({day, isToday, active, setActiveDay}) => {
+const DatePicker:React.FC<IDatePicker> = ({day, isToday, active, setActiveDay}) => {
   return (
     <div css={DayCss.day(isToday, active)} onClick={() => setActiveDay(day)}>
       {day.format("DD/MM/YYYY")}
@@ -16,4 +16,4 @@ const Day:React.FC<IDay> = ({day, isToday, active, setActiveDay}) => {
   );
 }
 
-export default Day;
+export default DatePicker;

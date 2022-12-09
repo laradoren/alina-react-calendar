@@ -11,3 +11,7 @@ export function getMonth(month = dayjs().month()) {
         })
     })
 };
+
+export function isDaysEqual(dayFromMonth: dayjs.Dayjs, day = dayjs()) {
+    return dayFromMonth.isSame(day, "D");
+}
