@@ -1,9 +1,10 @@
 import css from './Header.module.css';
+import CalendarHeader from '../CalendarHeader/CalendarHeader';
 
 function Header() {
   return (
     <header className={css.header}>
-      <div>React Calendar</div>
+      <CalendarHeader />
       <div className={css.actionList}>
         <button>Save as Json</button>
         <button>Save as picture</button>

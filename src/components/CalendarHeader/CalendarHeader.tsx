@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import css from './CalendarHeader.module.css';
-
-
 
 function CalendarHeader() {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
   return (
-    <div className={css.calendarHeader}>
+    <div>
       <button>{"<<"}</button>
       <div>
         <div>{currentMonth}</div>
