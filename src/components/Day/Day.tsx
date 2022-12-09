@@ -5,13 +5,15 @@ interface IDay {
   day: dayjs.Dayjs,
   isToday: boolean,
   active: boolean,
-  setActiveDay: Function
+  setActiveDay: Function,
+  isFirstRow: boolean,
 }
 
-const Day:React.FC<IDay> = ({day, isToday, active, setActiveDay}) => {
+const Day:React.FC<IDay> = ({day, isToday, active, setActiveDay, isFirstRow}) => {
   return (
     <div css={DayCss.day(isToday, active)} onClick={() => setActiveDay(day)}>
-      {day.format("DD/MM/YYYY")}
+      {day.format("DD")}
+      {isFirstRow && <div>{day.format("ddd")}</div>}
     </div>
   );
 }

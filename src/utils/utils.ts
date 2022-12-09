@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
 
-export function getMonth(month = dayjs().month()) {
-    const year = dayjs().year();
+export function getMonth(date = dayjs()) {
+    const month = date.month();
+    const year = date.year();
     const firstDayOfMonth = dayjs(new Date(year, month, 1)).day();
     let currentMonthCount = 0 - firstDayOfMonth;
     return new Array(5).fill([]).map(() => {
@@ -13,5 +14,11 @@ export function getMonth(month = dayjs().month()) {
 };
 
 export function isDaysEqual(dayFromMonth: dayjs.Dayjs, day = dayjs()) {
-    return dayFromMonth.isSame(day, "D");
+    return dayFromMonth.format("YYYY-MM-DD") === day.format("YYYY-MM-DD");
+}
+
+export function parseStringToDay(day: string) {
+    let splitDate = day.split("-");
+    let datesToInt = splitDate.map(item => parseInt(item));
+    return dayjs(new Date(datesToInt[0], datesToInt[1]-1, datesToInt[2]))
 }

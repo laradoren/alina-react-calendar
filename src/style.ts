@@ -14,7 +14,16 @@ export const HeaderCss = {
         padding: 10px;
         align-items: center;
     `,
-    actionList: css`` 
+    actionList: css``,
+    input: css`
+        display: inline;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        margin: 0px 10px;  
+        font-family: inherit;
+        background-color: lightgrey;
+    ` 
 };
 
 export const CalendarCss = {
