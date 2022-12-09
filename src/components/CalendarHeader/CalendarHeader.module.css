@@ -1,0 +1,12 @@
+.calendarHeader {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: gray;
+    font-size: 25px;
+}
+
+.calendarHeader button {
+    background-color: gray;
+    cursor: pointer;
+}

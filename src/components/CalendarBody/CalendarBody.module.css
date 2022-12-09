@@ -1,0 +1,6 @@
+.calendarBody {
+    display: grid;
+    padding: 20px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+}
