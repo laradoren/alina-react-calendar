@@ -2,14 +2,12 @@ import dayjs from "dayjs";
 import { CalendarCss } from "../../style";
 import Day from "../Day/Day";
 import React from "react";
-import { isDaysEqual } from "../../utils/utils";
 interface ICalendar {
   month: dayjs.Dayjs[][];
-  activeDay: dayjs.Dayjs;
-  setActiveDay: Function;
 }
 
-const Calendar: React.FC<ICalendar> = ({ month, activeDay, setActiveDay }) => {
+const Calendar: React.FC<ICalendar> = ({ month }) => {
+  
   return (
     <div css={CalendarCss.calendar}>
       {month.map((row, index) => {
@@ -18,9 +16,6 @@ const Calendar: React.FC<ICalendar> = ({ month, activeDay, setActiveDay }) => {
             day={day}
             key={i}
             isFirstRow={index === 0}
-            isToday={isDaysEqual(day)}
-            active={isDaysEqual(day, activeDay)}
-            setActiveDay={setActiveDay}
           />
         ));
       })}

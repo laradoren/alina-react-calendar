@@ -1,28 +1,27 @@
 import dayjs from "dayjs";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useContext } from "react";
+import GlobalContext from "../../context/GlobalContext";
 import { HeaderCss } from "../../style";
 import { parseStringToDay } from "../../utils/utils";
 
 interface IHeader {
   onHandleCreateTaskModal: MouseEventHandler<HTMLButtonElement>;
-  currentDateInput: string;
-  setCurrentDateInput: Function;
 }
 
 const Header: React.FC<IHeader> = ({
-  onHandleCreateTaskModal,
-  currentDateInput,
-  setCurrentDateInput
+  onHandleCreateTaskModal
 }) => {
 
+  const { currentDate, setCurrentDate } = useContext(GlobalContext);
+
   const setPrevMonth = () => {
-    let prevDayInMonth = parseStringToDay(currentDateInput);
-    setCurrentDateInput(dayjs(new Date(prevDayInMonth.year(), prevDayInMonth.month() - 1, prevDayInMonth.date())).format("YYYY-MM-DD"));
+    let prevDayInMonth = parseStringToDay(currentDate);
+    setCurrentDate(dayjs(new Date(prevDayInMonth.year(), prevDayInMonth.month() - 1, prevDayInMonth.date())).format("YYYY-MM-DD"));
   }
 
   const setNextMonth = () => {
-    let prevDayInMonth = parseStringToDay(currentDateInput);
-    setCurrentDateInput(dayjs(new Date(prevDayInMonth.year(), prevDayInMonth.month() + 1, prevDayInMonth.date())).format("YYYY-MM-DD"));
+    let prevDayInMonth = parseStringToDay(currentDate);
+    setCurrentDate(dayjs(new Date(prevDayInMonth.year(), prevDayInMonth.month() + 1, prevDayInMonth.date())).format("YYYY-MM-DD"));
   }
   
   return (
@@ -33,8 +32,8 @@ const Header: React.FC<IHeader> = ({
           type="date"
           css={HeaderCss.input}
           name="date"
-          value={currentDateInput}
-          onChange={(e) => setCurrentDateInput(e.target.value)}
+          value={currentDate}
+          onChange={(e) => setCurrentDate(e.target.value)}
         />
         <button onClick={setNextMonth}>{">"}</button>
         <button onClick={onHandleCreateTaskModal}>create task</button>
