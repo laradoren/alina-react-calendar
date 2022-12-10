@@ -36,7 +36,7 @@ const Header: React.FC<IHeader> = ({
         <button onClick={onHandleCreateTaskModal}>create task</button>
       </div>
       <div>
-        <input value={filter} onChange={(e) => setFilter(e.target.value)} />
+        <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder={"Filter tasks by label"} />
       </div>
       <div css={HeaderCss.actionList}>
         <button>Save as Json</button>

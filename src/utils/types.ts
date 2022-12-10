@@ -10,18 +10,23 @@ export interface ICreateTask {
     onHandleCreateTaskModal: MouseEventHandler<HTMLButtonElement>;
 };
 
-export interface IDatePicker {
-    onChooseDate: FormEventHandler<HTMLFormElement>;
-    onHandleDatePickerModal: MouseEventHandler<HTMLButtonElement>;
+export interface IDayDetails {
+    day: dayjs.Dayjs;
+    tasks: Array<ITask> | [];
+    handleDetailModal: MouseEventHandler<HTMLButtonElement>;
 };
 
 export interface IDay {
-    day: dayjs.Dayjs,
-    isFirstRow: boolean,
+    day: dayjs.Dayjs;
+    isFirstRow: boolean;
 };
 
 export interface IHeader {
     onHandleCreateTaskModal: MouseEventHandler<HTMLButtonElement>;
+}
+
+export interface IActiveTask {
+    activeTask: ITask
 }
 
 export interface IGlobalContext {
@@ -31,8 +36,8 @@ export interface IGlobalContext {
     setActiveDay: (day: dayjs.Dayjs) => void;
     dispatchCallTask: ({type, payload}: IDispatchCallTasksProps) => void;
     filteredTasks: Array<ITask> | [];
-    filter: string,
-    setFilter: (filter: string) => void,
+    filter: string;
+    setFilter: (filter: string) => void;
 }
 
 export interface ITask {

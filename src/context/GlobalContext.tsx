@@ -10,7 +10,7 @@ const GlobalContext = React.createContext<IGlobalContext>({
     dispatchCallTask: ({type, payload}: IDispatchCallTasksProps) => {},
     filteredTasks: [],
     filter: "",
-    setFilter: (filter: string) => {}
+    setFilter: (filter: string) => {},
 });
 
 export default GlobalContext;
