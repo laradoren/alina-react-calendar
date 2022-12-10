@@ -8,7 +8,9 @@ const GlobalContext = React.createContext<IGlobalContext>({
     activeDay: dayjs(),
     setActiveDay: (day: dayjs.Dayjs) => {},
     dispatchCallTask: ({type, payload}: IDispatchCallTasksProps) => {},
-    savedTasks: [],
+    filteredTasks: [],
+    filter: "",
+    setFilter: (filter: string) => {}
 });
 
 export default GlobalContext;

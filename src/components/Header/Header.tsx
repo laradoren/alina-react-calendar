@@ -9,7 +9,7 @@ const Header: React.FC<IHeader> = ({
   onHandleCreateTaskModal
 }) => {
 
-  const { currentDate, setCurrentDate } = useContext(GlobalContext);
+  const { currentDate, setCurrentDate, filter, setFilter } = useContext(GlobalContext);
 
   const setPrevMonth = () => {
     let prevDayInMonth = parseStringToDay(currentDate);
@@ -34,6 +34,9 @@ const Header: React.FC<IHeader> = ({
         />
         <button onClick={setNextMonth}>{">"}</button>
         <button onClick={onHandleCreateTaskModal}>create task</button>
+      </div>
+      <div>
+        <input value={filter} onChange={(e) => setFilter(e.target.value)} />
       </div>
       <div css={HeaderCss.actionList}>
         <button>Save as Json</button>

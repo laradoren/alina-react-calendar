@@ -30,7 +30,9 @@ export interface IGlobalContext {
     activeDay: dayjs.Dayjs;
     setActiveDay: (day: dayjs.Dayjs) => void;
     dispatchCallTask: ({type, payload}: IDispatchCallTasksProps) => void;
-    savedTasks: Array<ITask> | [];
+    filteredTasks: Array<ITask> | [];
+    filter: string,
+    setFilter: (filter: string) => void,
 }
 
 export interface ITask {

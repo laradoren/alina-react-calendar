@@ -27,19 +27,28 @@ const ContextWrapper = ({ children }: any) => {
   //TODO - fix this type
   const [currentDate, setCurrentDate] = useState(dayjs().format("YYYY-MM-DD"));
   const [activeDay, setActiveDay] = useState(dayjs());
+  const [filter, setFilter] = useState("");
   const [savedTasks, dispatchCallTask] = useReducer(
     savedTasksReducer,
     [],
     initTasks
   );
+  const [filteredTasks, setFilteredTasks] = useState(savedTasks);
+
 
   useEffect(() => {
     localStorage.setItem("savedTasks", JSON.stringify(savedTasks));
   }, [savedTasks]);
 
+  
+  useEffect(() => {
+    const filteredByLabel = savedTasks.filter(task => task.label.trim().toLowerCase().includes(filter.trim().toLowerCase()));
+    setFilteredTasks(filteredByLabel)
+  }, [filter, savedTasks]);
+
   return (
     <GlobalContext.Provider
-      value={{ currentDate, setCurrentDate, activeDay, setActiveDay, dispatchCallTask, savedTasks }}
+      value={{ currentDate, setCurrentDate, activeDay, setActiveDay, dispatchCallTask, filteredTasks, filter, setFilter }}
     >
       {children}
     </GlobalContext.Provider>
