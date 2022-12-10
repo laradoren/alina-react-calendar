@@ -1,11 +1,6 @@
 import dayjs from "dayjs";
-import { FormEventHandler, MouseEventHandler } from "react";
 import { CreateTaskCss, ModalCss } from "../../style";
-
-interface IDatePicker {
-  onChooseDate: FormEventHandler<HTMLFormElement>;
-  onHandleDatePickerModal: MouseEventHandler<HTMLButtonElement>;
-}
+import { IDatePicker } from "../../utils/types";
 
 const DatePicker:React.FC<IDatePicker> = ({onChooseDate, onHandleDatePickerModal}) => {
   return (

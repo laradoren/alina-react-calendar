@@ -1,12 +1,9 @@
 import dayjs from "dayjs";
-import { MouseEventHandler, useContext } from "react";
+import { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { HeaderCss } from "../../style";
+import { IHeader } from "../../utils/types";
 import { parseStringToDay } from "../../utils/utils";
-
-interface IHeader {
-  onHandleCreateTaskModal: MouseEventHandler<HTMLButtonElement>;
-}
 
 const Header: React.FC<IHeader> = ({
   onHandleCreateTaskModal

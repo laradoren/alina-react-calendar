@@ -9,7 +9,7 @@ import GlobalContext from "./context/GlobalContext";
 function App() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const [createTaskModal, setCreateTaskModal] = useState(false);
-  const { currentDate } = useContext(GlobalContext);
+  const { currentDate, dispatchCallTask } = useContext(GlobalContext);
 
   useEffect(() => {
     setCurrentMonth(getMonth(parseStringToDay(currentDate)));
@@ -19,10 +19,16 @@ function App() {
     //TODO - fix this type
     e.preventDefault();
     let formData = new FormData(e.target);
-    console.log(formData.get("date"));
-    console.log(formData.get("color"));
-    console.log(formData.get("label"));
-    console.log(formData.get("desc"));
+    const task = {
+      date: formData.get("date")?.toString() || currentDate,
+      color: formData.get("color")?.toString() || "blue",
+      label: formData.get("label")?.toString() || "",
+      desc: formData.get("desc")?.toString(),
+      id: Date.now().toString(),
+    };
+    
+    dispatchCallTask({type: "create", payload: task});
+    onHandleCreateTaskModal();
   };
 
   const onHandleCreateTaskModal = () => {

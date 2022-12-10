@@ -1,18 +1,15 @@
 import { CreateTaskCss, ModalCss } from "../../style";
-import React, { FormEventHandler, MouseEventHandler, useContext } from "react";
+import React, { useContext } from "react";
 import GlobalContext from "../../context/GlobalContext";
+import { ICreateTask } from "../../utils/types";
 
-interface ICreateTask {
-  onCreateNewTask: FormEventHandler<HTMLFormElement>;
-  onHandleCreateTaskModal: MouseEventHandler<HTMLButtonElement>;
-}
+// const colors = ["#ee3f3f", "#e71d9d", "#9427dd", "#4752eb", "#42d0ff", "#42ffad", "#47ee44", "#d8ee3f", "#ee7c11"]
 
 const CreateTask: React.FC<ICreateTask> = ({
   onCreateNewTask,
   onHandleCreateTaskModal,
 }) => {
   const { activeDay } = useContext(GlobalContext);
-
   return (
     <div css={ModalCss.overlay}>
       <div css={ModalCss.modal}>
@@ -26,11 +23,14 @@ const CreateTask: React.FC<ICreateTask> = ({
             name="date"
           />
           <div css={CreateTaskCss.label}>Label</div>
-          <input css={CreateTaskCss.input} name="label" />
+          <input css={CreateTaskCss.input} name="label" required />
           <div css={CreateTaskCss.label}>Description</div>
           <input css={CreateTaskCss.input} name="desc" />
           <div css={CreateTaskCss.label}>Color</div>
           <input css={CreateTaskCss.input} type="color" name="color" />
+          {/* <div css={CreateTaskCss.colors}>
+            {colors.map(color => <input css={CreateTaskCss.color(color)} type="radio" name="color" />)}
+          </div> */}
           <div css={CreateTaskCss.action}>
             <button
               css={CreateTaskCss.button(true)}

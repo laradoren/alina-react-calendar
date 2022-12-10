@@ -41,7 +41,16 @@ export const DayCss = {
         border: 1px grey solid;
         ${isToday && "border: green 2px solid;"}
         ${active && "background: lightgrey"}
-    `
+    `,
+    tasks: css`
+        margin-top: 20px;
+    `,
+    task: (color: string) => css`
+        background-color: ${color};
+        opacity: 0.7;
+        font-weight: 600;
+        margin-top: 3px;
+    `,
 }
 
 export const CreateTaskCss = {
@@ -70,6 +79,10 @@ export const CreateTaskCss = {
         margin-top: 10px;
         font-family: inherit;
     `,
+    // colors: css``,
+    // color: (color: string) => css`
+    //     background-color: red;
+    // `,
     action: css`
         display: flex;
     `,

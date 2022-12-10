@@ -1,10 +1,8 @@
-import dayjs from "dayjs";
 import { CalendarCss } from "../../style";
 import Day from "../Day/Day";
 import React from "react";
-interface ICalendar {
-  month: dayjs.Dayjs[][];
-}
+import { ICalendar } from "../../utils/types";
+
 
 const Calendar: React.FC<ICalendar> = ({ month }) => {
   
