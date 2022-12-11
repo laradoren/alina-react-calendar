@@ -8,10 +8,14 @@ export const AppCss = {
 
 export const HeaderCss = {
     header: css`
-        background-color: lightgrey;
+        background-color: green;
         display: flex;
         justify-content: space-between;
         padding: 10px;
+        align-items: center;
+    `,
+    date: css`
+        display: flex;
         align-items: center;
     `,
     actionList: css``,
@@ -22,8 +26,26 @@ export const HeaderCss = {
         outline: none;
         margin: 0px 10px;  
         font-family: inherit;
-        background-color: lightgrey;
-    ` 
+        background-color: green;
+    `, 
+    button: css`
+        font-size: 26px;
+        background-color: green;
+        color: white;
+        font-weight: 600;
+        border: none;
+        padding: 0;
+        line-height: 0;
+    `,
+    action: css`
+        background-color: green;
+        font-weight: 500;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 5px 12px;
+        margin-left: 20px;
+        cursor: pointer;
+    `
 };
 
 export const CalendarCss = {

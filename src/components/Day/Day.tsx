@@ -29,7 +29,7 @@ const Day:React.FC<IDay> = ({day, isFirstRow}) => {
         {isActive && <div css={DayCss.activeButton} onClick={handleDetailModal}> <CgMoreO /> </div>}
         {day.format("DD")}
         {isFirstRow && <div>{day.format("ddd")}</div>}
-        <div css={DayCss.tasks}>{dayTasks.map((task: ITask) => <div key={task.id} css={DayCss.task(task.color)}>{task.label}</div>)}</div>
+        <div css={DayCss.tasks}>{dayTasks.map((task: ITask) => <div draggable key={task.id} css={DayCss.task(task.color)}>{task.label}</div>)}</div>
       </div>
       {detailModalShow && <DayDetails day={day} tasks={dayTasks} handleDetailModal={handleDetailModal} />}
     </React.Fragment>

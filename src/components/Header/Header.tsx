@@ -4,27 +4,44 @@ import GlobalContext from "../../context/GlobalContext";
 import { HeaderCss } from "../../style";
 import { IHeader } from "../../utils/types";
 import { parseStringToDay } from "../../utils/utils";
+import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
-const Header: React.FC<IHeader> = ({
-  onHandleCreateTaskModal
-}) => {
-
-  const { currentDate, setCurrentDate, filter, setFilter } = useContext(GlobalContext);
+const Header: React.FC<IHeader> = ({ onHandleCreateTaskModal }) => {
+  const { currentDate, setCurrentDate, filter, setFilter } =
+    useContext(GlobalContext);
 
   const setPrevMonth = () => {
     let prevDayInMonth = parseStringToDay(currentDate);
-    setCurrentDate(dayjs(new Date(prevDayInMonth.year(), prevDayInMonth.month() - 1, prevDayInMonth.date())).format("YYYY-MM-DD"));
-  }
+    setCurrentDate(
+      dayjs(
+        new Date(
+          prevDayInMonth.year(),
+          prevDayInMonth.month() - 1,
+          prevDayInMonth.date()
+        )
+      ).format("YYYY-MM-DD")
+    );
+  };
 
   const setNextMonth = () => {
-    let prevDayInMonth = parseStringToDay(currentDate);
-    setCurrentDate(dayjs(new Date(prevDayInMonth.year(), prevDayInMonth.month() + 1, prevDayInMonth.date())).format("YYYY-MM-DD"));
-  }
-  
+    const prevDayInMonth = parseStringToDay(currentDate);
+    setCurrentDate(
+      dayjs(
+        new Date(
+          prevDayInMonth.year(),
+          prevDayInMonth.month() + 1,
+          prevDayInMonth.date()
+        )
+      ).format("YYYY-MM-DD")
+    );
+  };
+
   return (
     <header css={HeaderCss.header}>
-      <div>
-        <button onClick={setPrevMonth}>{"<"}</button>
+      <div css={HeaderCss.date}>
+        <button css={HeaderCss.button} onClick={setPrevMonth}>
+          <GrFormPrevious />
+        </button>
         <input
           type="date"
           css={HeaderCss.input}
@@ -32,15 +49,23 @@ const Header: React.FC<IHeader> = ({
           value={currentDate}
           onChange={(e) => setCurrentDate(e.target.value)}
         />
-        <button onClick={setNextMonth}>{">"}</button>
-        <button onClick={onHandleCreateTaskModal}>create task</button>
+        <button onClick={setNextMonth} css={HeaderCss.button}>
+          <GrFormNext />
+        </button>
+        <button onClick={onHandleCreateTaskModal} css={HeaderCss.action}>create task</button>
       </div>
       <div>
-        <input value={filter} onChange={(e) => setFilter(e.target.value)} placeholder={"Filter tasks by label"} />
+        <input
+          value={filter}
+          css={HeaderCss.input}
+          onChange={(e) => setFilter(e.target.value)}
+          placeholder={"Filter tasks by label"}
+        />
       </div>
       <div css={HeaderCss.actionList}>
-        <button>Save as Json</button>
-        <button>Save as picture</button>
+        <button css={HeaderCss.action}>Save as Json</button>
+        <button css={HeaderCss.action}>Load from Json</button>
+        <button css={HeaderCss.action}>Save as picture</button>
       </div>
     </header>
   );

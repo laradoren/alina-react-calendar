@@ -18,7 +18,7 @@ export function isDaysEqual(dayFromMonth: dayjs.Dayjs, day = dayjs()) {
 }
 
 export function parseStringToDay(day: string) {
-    let splitDate = day.split("-");
-    let datesToInt = splitDate.map(item => parseInt(item));
+    const splitDate = day.split("-");
+    const datesToInt = splitDate.map(item => parseInt(item));
     return dayjs(new Date(datesToInt[0], datesToInt[1]-1, datesToInt[2]))
 }
