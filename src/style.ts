@@ -76,6 +76,7 @@ export const DayCss = {
     `,
     tasks: css`
         margin-top: 20px;
+        height: calc(100% - 35px);
     `,
     task: (color: string) => css`
         background-color: ${color}aa;

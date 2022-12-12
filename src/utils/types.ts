@@ -29,13 +29,18 @@ export interface IActiveTask {
     activeTask: ITask
 }
 
+export interface ITaskComponent {
+    index: number,
+    task: ITask
+}
+
 export interface IGlobalContext {
     currentDate: string;
     setCurrentDate: (day: string) => void;
     activeDay: dayjs.Dayjs;
     setActiveDay: (day: dayjs.Dayjs) => void;
     dispatchCallTask: ({type, payload}: IDispatchCallTasksProps) => void;
-    filteredTasks: Array<ITask> | [];
+    filteredTasks: ITasksInDay;
     filter: string;
     setFilter: (filter: string) => void;
 }
@@ -45,10 +50,23 @@ export interface ITask {
     color: string,
     desc?: string,
     date: string,
-    id: string
+    id: string,
+}
+
+export interface ITaskDrapProps {
+    label: string,
+    color: string,
+    desc?: string,
+    date: string,
+    id: string,
+    draggedItems?: ITasksInDay,
 }
 
 export interface IDispatchCallTasksProps {
     type: string,
-    payload: ITask
+    payload: ITaskDrapProps
+}
+
+export interface ITasksInDay {
+    [key: string] : Array<ITask>
 }

@@ -6,34 +6,74 @@ import { IDay, ITask } from "../../utils/types";
 import { isDaysEqual } from "../../utils/utils";
 import DayDetails from "../DayDetails/DayDetails";
 import { CgMoreO } from "react-icons/cg";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 
-const Day:React.FC<IDay> = ({day, isFirstRow}) => {
+const Day: React.FC<IDay> = ({ day, isFirstRow }) => {
   const { activeDay, setActiveDay, filteredTasks } = useContext(GlobalContext);
-  const [ dayTasks, setDayTasks ] = useState(filteredTasks);
-  const [ detailModalShow, setDetailModalShow ] = useState(false);
+  const [dayTasks, setDayTasks] = useState<ITask[]>([]);
+  const [detailModalShow, setDetailModalShow] = useState(false);
 
   useEffect(() => {
-    setDayTasks(filteredTasks.filter((task: ITask) => task.date === day.format("YYYY-MM-DD")))
+    if (filteredTasks[day.format("YYYY-MM-DD")]) {
+      setDayTasks(filteredTasks[day.format("YYYY-MM-DD")]);
+    }
   }, [filteredTasks, day]);
 
   const handleDetailModal = () => {
-    setDetailModalShow(prev => !prev);
-  }
-  
+    setDetailModalShow((prev) => !prev);
+  };
 
   const isToday = isDaysEqual(day);
   const isActive = isDaysEqual(day, activeDay);
   return (
     <React.Fragment>
-      <div css={DayCss.day(isToday, isActive)} onClick={() => setActiveDay(day)}>
-        {isActive && <div css={DayCss.activeButton} onClick={handleDetailModal}> <CgMoreO /> </div>}
+      <div
+        css={DayCss.day(isToday, isActive)}
+        onClick={() => setActiveDay(day)}
+      >
+        {isActive && (
+          <div css={DayCss.activeButton} onClick={handleDetailModal}>
+            {" "}
+            <CgMoreO />{" "}
+          </div>
+        )}
         {day.format("DD")}
         {isFirstRow && <div>{day.format("ddd")}</div>}
-        <div css={DayCss.tasks}>{dayTasks.map((task: ITask) => <div draggable key={task.id} css={DayCss.task(task.color)}>{task.label}</div>)}</div>
+        <Droppable droppableId={day.format("YYYY-MM-DD")}>
+          {(dropableProvided) => (
+            <div
+              css={DayCss.tasks}
+              ref={dropableProvided.innerRef}
+              {...dropableProvided.droppableProps}
+            >
+              {dayTasks.map((task: ITask, index: number) => (
+                <Draggable draggableId={task.id} index={index} key={task.id}>
+                  {(draggableProvided) => (
+                    <div
+                      css={DayCss.task(task.color)}
+                      ref={draggableProvided.innerRef}
+                      {...draggableProvided.draggableProps}
+                      {...draggableProvided.dragHandleProps}
+                    >
+                      {task.label}
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {dropableProvided.placeholder}
+            </div>
+          )}
+        </Droppable>
       </div>
-      {detailModalShow && <DayDetails day={day} tasks={dayTasks} handleDetailModal={handleDetailModal} />}
+      {detailModalShow && (
+        <DayDetails
+          day={day}
+          tasks={dayTasks}
+          handleDetailModal={handleDetailModal}
+        />
+      )}
     </React.Fragment>
   );
-}
+};
 
 export default Day;

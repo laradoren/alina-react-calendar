@@ -1,18 +1,32 @@
 import dayjs from "dayjs";
 import { useEffect, useReducer, useState } from "react";
-import { IDispatchCallTasksProps, ITask } from "../utils/types";
+import { IDispatchCallTasksProps, ITasksInDay } from "../utils/types";
 import GlobalContext from "./GlobalContext";
 
-function savedTasksReducer(state: Array<ITask>, { type, payload }: IDispatchCallTasksProps) {
+function savedTasksReducer(
+  state: ITasksInDay,
+  { type, payload }: IDispatchCallTasksProps
+) {
+  const newState = { ...state };
+  const key = payload.date;
   switch (type) {
     case "create":
-      return [...state, payload];
+      if (newState[key]) {
+        newState[key].push(payload);
+      } else {
+        newState[key] = [payload];
+      }
+      return newState;
     case "edit":
-      return state.map((item: any) =>
+      newState[key] = newState[key].map((item: any) =>
         item.id === payload.id ? payload : item
       );
+      return newState;
     case "delete":
-      return state.filter((item: any) => item.id !== payload.id);
+      newState[key] = newState[key].filter((item: any) => item.id !== payload.id)
+      return newState;
+    case "drag": 
+      return {...newState, ...payload.draggedItems};
     default:
       throw new Error("Unknow type for TasksReducer");
   }
@@ -20,7 +34,7 @@ function savedTasksReducer(state: Array<ITask>, { type, payload }: IDispatchCall
 
 function initTasks() {
   const storageTasks = localStorage.getItem("savedTasks");
-  return storageTasks ? JSON.parse(storageTasks) : [];
+  return storageTasks ? JSON.parse(storageTasks) : {};
 }
 
 const ContextWrapper = ({ children }: any) => {
@@ -30,25 +44,35 @@ const ContextWrapper = ({ children }: any) => {
   const [filter, setFilter] = useState("");
   const [savedTasks, dispatchCallTask] = useReducer(
     savedTasksReducer,
-    [],
+    {},
     initTasks
   );
   const [filteredTasks, setFilteredTasks] = useState(savedTasks);
-
 
   useEffect(() => {
     localStorage.setItem("savedTasks", JSON.stringify(savedTasks));
   }, [savedTasks]);
 
-  
   useEffect(() => {
-    const filteredByLabel = savedTasks.filter(task => task.label.trim().toLowerCase().includes(filter.trim().toLowerCase()));
-    setFilteredTasks(filteredByLabel)
+    const filteredByLabel: ITasksInDay = {};
+    Object.keys(savedTasks).map(date => filteredByLabel[date] = savedTasks[date].filter((task) =>
+    task.label.trim().toLowerCase().includes(filter.trim().toLowerCase()))
+  );
+    setFilteredTasks(filteredByLabel);
   }, [filter, savedTasks]);
 
   return (
     <GlobalContext.Provider
-      value={{ currentDate, setCurrentDate, activeDay, setActiveDay, dispatchCallTask, filteredTasks, filter, setFilter }}
+      value={{
+        currentDate,
+        setCurrentDate,
+        activeDay,
+        setActiveDay,
+        dispatchCallTask,
+        filteredTasks,
+        filter,
+        setFilter,
+      }}
     >
       {children}
     </GlobalContext.Provider>
