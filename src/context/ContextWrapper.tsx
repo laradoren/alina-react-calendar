@@ -50,6 +50,11 @@ const ContextWrapper = ({ children }: any) => {
   const [filteredTasks, setFilteredTasks] = useState(savedTasks);
 
   useEffect(() => {
+    console.log("Change");
+    
+  }, [currentDate]);
+
+  useEffect(() => {
     localStorage.setItem("savedTasks", JSON.stringify(savedTasks));
   }, [savedTasks]);
 

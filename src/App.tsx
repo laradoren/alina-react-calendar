@@ -42,13 +42,12 @@ function App() {
 
     let newTasksAfterDrag = { ...filteredTasks};
 
-    const dragTask = newTasksAfterDrag[source.droppableId].find((item) => {
-      if(item.id === draggableId) {
-        return {...item, date: destination.droppableId}
-      } 
-      return false;
-    });
+    const dragTask = newTasksAfterDrag[source.droppableId].find((item) => item.id === draggableId);
     if(!dragTask) return;
+    dragTask.date = destination.droppableId;
+
+    console.log(dragTask);
+    
     
     if(destination.droppableId === source.droppableId && destination.index === source.index) return;
      

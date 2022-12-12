@@ -9,15 +9,18 @@ import { CgMoreO } from "react-icons/cg";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
 const Day: React.FC<IDay> = ({ day, isFirstRow }) => {
-  const { activeDay, setActiveDay, filteredTasks } = useContext(GlobalContext);
+  const { activeDay, setActiveDay, filteredTasks, currentDate } =
+    useContext(GlobalContext);
   const [dayTasks, setDayTasks] = useState<ITask[]>([]);
   const [detailModalShow, setDetailModalShow] = useState(false);
 
   useEffect(() => {
-    if (filteredTasks[day.format("YYYY-MM-DD")]) {
-      setDayTasks(filteredTasks[day.format("YYYY-MM-DD")]);
-    }
-  }, [filteredTasks, day]);
+    setDayTasks(
+      filteredTasks[day.format("YYYY-MM-DD")]
+        ? filteredTasks[day.format("YYYY-MM-DD")]
+        : []
+    );
+  }, [filteredTasks, day, currentDate]);
 
   const handleDetailModal = () => {
     setDetailModalShow((prev) => !prev);

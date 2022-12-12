@@ -39,12 +39,19 @@ export const HeaderCss = {
     `,
     action: css`
         background-color: green;
-        font-weight: 500;
-        border: 1px solid black;
-        border-radius: 5px;
+        font-weight: 600;
+        border: 2px solid black;
+        border-radius: 7px;
         padding: 5px 12px;
         margin-left: 20px;
         cursor: pointer;
+    `,
+    filter: css`
+        border: 2px solid black;
+        display: flex;
+        padding: 2px 5px;
+        align-items: center;
+        border-radius: 7px;
     `
 };
 
@@ -61,8 +68,8 @@ export const DayCss = {
     day: (isToday: boolean, active: boolean) => css`
         padding: 5px;
         border: 1px grey solid;
-        ${isToday && "border: green 2px solid;"}
-        ${active && "background: #acecb7ff;"}
+        ${active && "border: green 3px solid;"}
+        ${isToday && "background: #acecb7ff;"}
         position: relative;
     `,
     activeButton: css`
@@ -72,6 +79,7 @@ export const DayCss = {
         right: 2px;
         z-index: 100;
         font-size: 20px;
+        font-weight: 800;
         transition: opacity 750ms cubic-bezier(0.4, 0, 0.2, 1);
     `,
     tasks: css`

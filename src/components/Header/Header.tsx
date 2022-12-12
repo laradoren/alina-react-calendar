@@ -5,6 +5,7 @@ import { HeaderCss } from "../../style";
 import { IHeader } from "../../utils/types";
 import { parseStringToDay } from "../../utils/utils";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
+import {HiSearch } from "react-icons/hi";
 
 const Header: React.FC<IHeader> = ({ onHandleCreateTaskModal }) => {
   const { currentDate, setCurrentDate, filter, setFilter } =
@@ -52,14 +53,14 @@ const Header: React.FC<IHeader> = ({ onHandleCreateTaskModal }) => {
         <button onClick={setNextMonth} css={HeaderCss.button}>
           <GrFormNext />
         </button>
-        <button onClick={onHandleCreateTaskModal} css={HeaderCss.action}>create task</button>
+        <button onClick={onHandleCreateTaskModal} css={HeaderCss.action}>Create task</button>
       </div>
-      <div>
+      <div css={HeaderCss.filter}>
+        <HiSearch />
         <input
           value={filter}
           css={HeaderCss.input}
           onChange={(e) => setFilter(e.target.value)}
-          placeholder={"Filter tasks by label"}
         />
       </div>
       <div css={HeaderCss.actionList}>
