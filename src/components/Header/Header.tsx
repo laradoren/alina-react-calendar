@@ -128,7 +128,7 @@ const Header: React.FC<IHeader> = ({ onHandleCreateTaskModal }) => {
       </div>
       <div css={HeaderCss.actionList}>
         <button css={HeaderCss.action} onClick={onExportData}>Save as Json</button>
-        <label htmlFor="file-upload" css={HeaderCss.action}>
+        <label htmlFor="file-upload" css={HeaderCss.fileAction}>
             Load from JSON
         </label>
         <input id="file-upload" type="file" css={HeaderCss.file} onChange={(e:any) => onImportData(e.target.files[0])}/>

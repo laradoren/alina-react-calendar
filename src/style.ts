@@ -18,7 +18,10 @@ export const HeaderCss = {
         display: flex;
         align-items: center;
     `,
-    actionList: css``,
+    actionList: css`
+        display: flex;
+        align-items: center;
+    `,
     input: css`
         display: inline;
         font-size: 18px;
@@ -52,6 +55,16 @@ export const HeaderCss = {
         padding: 2px 5px;
         align-items: center;
         border-radius: 7px;
+    `,
+    fileAction: css`
+        background-color: green;
+        font-weight: 700;
+        border: 2px solid black;
+        border-radius: 7px;
+        padding: 4px 12px;
+        margin-left: 20px;
+        cursor: pointer;
+        font-size: 13px;
     `,
     file: css`
         opacity: 0;
