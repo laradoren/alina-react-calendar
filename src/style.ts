@@ -72,6 +72,11 @@ export const DayCss = {
         ${isToday && "background: #acecb7ff;"}
         position: relative;
     `,
+    holiday: css`
+        font-size: 10px;
+        color: green;
+        font-weight: 700;
+    `,
     activeButton: css`
         color: green;
         position: absolute;

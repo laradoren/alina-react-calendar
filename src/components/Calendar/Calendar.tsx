@@ -5,7 +5,7 @@ import { ICalendar } from "../../utils/types";
 
 
 const Calendar: React.FC<ICalendar> = ({ month }) => {
-  
+
   return (
     <div css={CalendarCss.calendar}>
       {month.map((row, index) => {

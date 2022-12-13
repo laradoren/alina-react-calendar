@@ -2,17 +2,18 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { DayCss } from "../../style";
-import { IDay, ITask } from "../../utils/types";
+import { IDay, IHoliday, ITask } from "../../utils/types";
 import { isDaysEqual } from "../../utils/utils";
 import DayDetails from "../DayDetails/DayDetails";
 import { CgMoreO } from "react-icons/cg";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
 const Day: React.FC<IDay> = ({ day, isFirstRow }) => {
-  const { activeDay, setActiveDay, filteredTasks, currentDate } =
+  const { activeDay, setActiveDay, filteredTasks, currentDate, publicHoliday } =
     useContext(GlobalContext);
   const [dayTasks, setDayTasks] = useState<ITask[]>([]);
-  const [detailModalShow, setDetailModalShow] = useState(false);
+  const [detailModalShow, setDetailModalShow] = useState<boolean>(false); 
+  const [holiday, setHoliday] = useState<IHoliday>();
 
   useEffect(() => {
     setDayTasks(
@@ -21,6 +22,16 @@ const Day: React.FC<IDay> = ({ day, isFirstRow }) => {
         : []
     );
   }, [filteredTasks, day, currentDate]);
+
+  useEffect(() => {
+    console.log("Change");
+    
+    const todayHoliday = publicHoliday.find((item:IHoliday) => item.date === day.format("YYYY-MM-DD"));
+    setHoliday(todayHoliday ? todayHoliday : undefined);
+
+    console.log(todayHoliday);
+    
+  }, [publicHoliday, day, currentDate])
 
   const handleDetailModal = () => {
     setDetailModalShow((prev) => !prev);
@@ -40,6 +51,7 @@ const Day: React.FC<IDay> = ({ day, isFirstRow }) => {
             <CgMoreO />{" "}
           </div>
         )}
+        <div css={DayCss.holiday}>{holiday?.name }</div>
         {day.format("DD")}
         {isFirstRow && <div>{day.format("ddd")}</div>}
         <Droppable droppableId={day.format("YYYY-MM-DD")}>

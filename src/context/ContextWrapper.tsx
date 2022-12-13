@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useEffect, useReducer, useState } from "react";
-import { IDispatchCallTasksProps, ITasksInDay } from "../utils/types";
+import { CalendarApi } from "../api/CalendarApi";
+import { IDispatchCallTasksProps, IHoliday, ITasksInDay } from "../utils/types";
 import GlobalContext from "./GlobalContext";
 
 function savedTasksReducer(
@@ -48,9 +49,12 @@ const ContextWrapper = ({ children }: any) => {
     initTasks
   );
   const [filteredTasks, setFilteredTasks] = useState(savedTasks);
+  const [publicHoliday, setPublicHoliday] = useState<IHoliday[]>([]);
 
-  useEffect(() => {
-    console.log("Change");
+  useEffect(() => {    
+    CalendarApi.getPublicHolidays(currentDate.slice(0, 4)).then(response => {
+      setPublicHoliday(response.data);
+    });
     
   }, [currentDate]);
 
@@ -77,6 +81,7 @@ const ContextWrapper = ({ children }: any) => {
         filteredTasks,
         filter,
         setFilter,
+        publicHoliday
       }}
     >
       {children}

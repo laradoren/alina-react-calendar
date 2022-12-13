@@ -43,6 +43,7 @@ export interface IGlobalContext {
     filteredTasks: ITasksInDay;
     filter: string;
     setFilter: (filter: string) => void;
+    publicHoliday: Array<IHoliday>;
 }
 
 export interface ITask {
@@ -70,3 +71,15 @@ export interface IDispatchCallTasksProps {
 export interface ITasksInDay {
     [key: string] : Array<ITask>
 }
+
+export interface IHoliday {
+    date: string,
+    localName: string,
+    name: string,
+    countryCode: string,
+    fixed: boolean,
+    global: boolean,
+    counties: null,
+    launchYear:null,
+    types: string[]
+} 
