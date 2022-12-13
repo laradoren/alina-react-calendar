@@ -1,5 +1,6 @@
 {
   "name": "alina-react-calendar",
+  "homepage": "https://laradoren.github.io/alina-react-calendar/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
