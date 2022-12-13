@@ -6,10 +6,11 @@ import { AppCss } from "./style";
 import CreateTask from "./components/CreateTask/CreateTask";
 import GlobalContext from "./context/GlobalContext";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { Dayjs } from "dayjs";
 
 function App() {
-  const [currentMonth, setCurrentMonth] = useState(getMonth());
-  const [createTaskModal, setCreateTaskModal] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState<Dayjs[][]>(getMonth());
+  const [createTaskModal, setCreateTaskModal] = useState<boolean>(false);
   const { currentDate, dispatchCallTask, filteredTasks } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -17,7 +18,6 @@ function App() {
   }, [currentDate]);
 
   const onCreateNewTask = (e: any) => {
-    //TODO - fix this type
     e.preventDefault();
     let formData = new FormData(e.target);
     const task = {
@@ -44,10 +44,7 @@ function App() {
 
     const dragTask = newTasksAfterDrag[source.droppableId].find((item) => item.id === draggableId);
     if(!dragTask) return;
-    dragTask.date = destination.droppableId;
-
-    console.log(dragTask);
-    
+    dragTask.date = destination.droppableId;    
     
     if(destination.droppableId === source.droppableId && destination.index === source.index) return;
      
