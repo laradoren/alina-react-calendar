@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useReducer, useState } from "react";
 import { CalendarApi } from "../api/CalendarApi";
 import { IDispatchCallTasksProps, IHoliday, ITasksInDay } from "../utils/types";
@@ -42,15 +42,15 @@ function initTasks() {
 
 const ContextWrapper = ({ children }: any) => {
   //TODO - fix this type
-  const [currentDate, setCurrentDate] = useState(dayjs().format("YYYY-MM-DD"));
-  const [activeDay, setActiveDay] = useState(dayjs());
-  const [filter, setFilter] = useState("");
+  const [currentDate, setCurrentDate] = useState<string>(dayjs().format("YYYY-MM-DD"));
+  const [activeDay, setActiveDay] = useState<Dayjs>(dayjs());
+  const [filter, setFilter] = useState<string>("");
   const [savedTasks, dispatchCallTask] = useReducer(
     savedTasksReducer,
     {},
     initTasks
   );
-  const [filteredTasks, setFilteredTasks] = useState(savedTasks);
+  const [filteredTasks, setFilteredTasks] = useState<ITasksInDay>(savedTasks);
   const [publicHoliday, setPublicHoliday] = useState<IHoliday[]>([]);
 
   useEffect(() => {    
