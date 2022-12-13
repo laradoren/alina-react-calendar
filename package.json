@@ -1,6 +1,7 @@
 {
   "name": "alina-react-calendar",
   "version": "0.1.0",
+  "homepage": "https://laradoren.github.io/alina-react-calendar/",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
