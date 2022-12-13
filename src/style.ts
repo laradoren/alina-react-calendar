@@ -52,6 +52,10 @@ export const HeaderCss = {
         padding: 2px 5px;
         align-items: center;
         border-radius: 7px;
+    `,
+    file: css`
+        opacity: 0;
+        display: none;
     `
 };
 
@@ -61,6 +65,7 @@ export const CalendarCss = {
         grid-template-columns: repeat(7, 1fr);
         grid-template-rows: repeat(5, 1fr);
         height: calc(100vh - 45px);
+        background-color: white;
     `
 };
 

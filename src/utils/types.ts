@@ -61,6 +61,7 @@ export interface ITaskDrapProps {
     date: string,
     id: string,
     draggedItems?: ITasksInDay,
+    tasksFromFile?: ITasksInDay,
 }
 
 export interface IDispatchCallTasksProps {

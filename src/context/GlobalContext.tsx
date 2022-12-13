@@ -11,7 +11,7 @@ const GlobalContext = React.createContext<IGlobalContext>({
     filteredTasks: {},
     filter: "",
     setFilter: (filter: string) => {},
-    publicHoliday: []
+    publicHoliday: [],
 });
 
 export default GlobalContext;

@@ -28,6 +28,8 @@ function savedTasksReducer(
       return newState;
     case "drag": 
       return {...newState, ...payload.draggedItems};
+    case "set":     
+      return {...payload.tasksFromFile}  
     default:
       throw new Error("Unknow type for TasksReducer");
   }
